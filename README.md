@@ -48,7 +48,7 @@ uncover-echo/
 └── tests/test_transients.py
 ```
 
-## Ce qui a changé par rapport à la version du log de conversation
+## Ce qui a changé par rapport à la version précédente
 
 **Corrections de bugs réels :**
 - `ZoomEyeClient.has_credentials()` était cassé : la classe de base ne
