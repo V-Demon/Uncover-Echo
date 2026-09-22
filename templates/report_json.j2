@@ -1,0 +1,26 @@
+{
+  "scan_id": {{ report.scan_id | tojson }},
+  "started_at": {{ report.started_at | tojson }},
+  "finished_at": {{ report.finished_at | tojson }},
+  "preset": {{ report.preset | tojson }},
+  "query": {{ report.query | tojson }},
+  "engines": {{ report.engines | tojson }},
+  "summary": {
+    "total_results": {{ report.total_results }},
+    "total_anomalies": {{ report.total_transients }}
+  },
+  "results_by_engine": {
+    {% for engine, results in report.results_by_engine.items() -%}
+    "{{ engine }}": [
+      {% for r in results -%}
+      {"ip": {{ r.ip | tojson }}, "port": {{ r.port }}, "product": {{ r.product | tojson }}, "version": {{ r.version | tojson }}, "simulated": {{ r.simulated | tojson }}}{{ "," if not loop.last }}
+      {% endfor -%}
+    ]{{ "," if not loop.last }}
+    {% endfor -%}
+  },
+  "anomalies": [
+    {% for t in report.transients -%}
+    {"delta": {{ t.delta }}, "signals": {{ t.signals_detected | tojson }}, "confidence": {{ t.confidence }}}{{ "," if not loop.last }}
+    {% endfor -%}
+  ]
+}

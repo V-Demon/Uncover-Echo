@@ -1,0 +1,78 @@
+# ==============================================================================
+# Module "transients" — détection d'anomalies de version/date dans les
+# bannières de services (versions ou timestamps incohérents avec le présent).
+#
+# δ (delta) = distance normalisée entre l'année détectée et une année de
+# référence de comparaison. Ce n'est PAS une mesure physique : c'est une
+# heuristique de scoring pour trier des faux positifs probables (données de
+# test, horloges mal réglées, valeurs par défaut) dans les résultats OSINT.
+# ==============================================================================
+
+enabled: true
+
+# Seuils de scoring δ
+thresholds:
+  critique: 0.4        # δ < 0.4 → anomalie forte
+  eleve: 0.6           # 0.4 ≤ δ < 0.6 → anomalie haute
+  modere: 0.8          # 0.6 ≤ δ < 0.8 → anomalie modérée
+  # δ ≥ 0.8 → considéré comme normal
+
+# Fenêtre d'observation
+observation:
+  annee_reference: 2075        # année de référence pour le calcul de δ (paramétrable)
+  tolerance_jours: 30
+  detecter_futur: true
+  detecter_passe_lointain: true
+  annee_min_passe: 1970
+
+# Signaux à extraire
+signals:
+  version_future:
+    enabled: true
+    regex: 'v?(\d{2,4})\.\d+'
+    seuil_annee_plausible: 2026
+    poids: 0.4
+
+  timestamp_futur:
+    enabled: true
+    poids: 0.3
+
+  cert_futur:
+    enabled: true
+    champs: ['not_valid_after', 'not_before']
+    poids: 0.3
+
+  incoherence_signature:
+    enabled: true
+    poids: 0.2
+
+  version_impossible:
+    enabled: true
+    poids: 0.5
+
+# Pondération globale pour le calcul de δ
+weights:
+  version_future: 0.30
+  timestamp_futur: 0.25
+  cert_futur: 0.20
+  incoherence_signature: 0.10
+  version_impossible: 0.15
+
+# Classification par tranches d'années (purement indicative)
+strates:
+  passe_proche: [2020, 2025]
+  present: [2026, 2027]
+  futur_proche: [2028, 2050]
+  futur_lointain: [2051, 2099]
+  omega: [2100, 9999]
+
+# Bandeau d'attente affiché pendant un scan.
+# IMPORTANT : la durée affichée DOIT correspondre à la durée réelle.
+# Ce n'est plus configurable pour mentir à l'utilisateur (voir CHANGELOG v3.1
+# dans README.md) — le compte à rebours utilise désormais duree_reelle_sec
+# pour les deux valeurs. Le nom "protocole_ma" est conservé pour la
+# compatibilité mais n'introduit plus aucun décalage.
+protocole_attente:
+  enabled: true
+  duree_reelle_sec: 2.1
+  message: "Interrogation des moteurs en cours..."

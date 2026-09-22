@@ -1,0 +1,153 @@
+# ==============================================================================
+# Presets DevOps/Cloud + presets "transitoires" (thématiques)
+# ==============================================================================
+
+presets:
+  kubernetes:
+    description: "Clusters Kubernetes exposés (API server, dashboard, kubelet)"
+    risk_level: CRITICAL
+    ports: [6443, 10250, 10255, 8080, 30000]
+    queries:
+      shodan: 'kubernetes OR "k8s" OR "kubelet" OR port:6443'
+      censys: 'services.software.product="Kubernetes" OR services.kubernetes.version'
+      fofa: 'app="Kubernetes" || title="Kubernetes Dashboard"'
+      zoomeye: 'app:"Kubernetes"'
+
+  docker:
+    description: "Docker API/Daemon exposés (sans auth)"
+    risk_level: HIGH
+    ports: [2375, 2376, 80, 443]
+    queries:
+      shodan: 'docker OR "Docker Container" OR port:2375 OR port:2376'
+      censys: 'services.docker OR services.software.product="Docker"'
+      fofa: 'app="Docker" || body="docker"'
+      zoomeye: 'service:"Docker"'
+
+  jenkins:
+    description: "Serveurs CI/CD Jenkins"
+    risk_level: HIGH
+    ports: [8080, 50000]
+    queries:
+      shodan: 'jenkins OR "Jenkins-CI" OR port:8080 http.title:"Jenkins"'
+      censys: 'services.software.product="Jenkins" OR http.title="Jenkins"'
+      fofa: 'app="Jenkins"'
+      zoomeye: 'app:"Jenkins"'
+
+  gitlab:
+    description: "Instances GitLab (CI/CD, repositories)"
+    risk_level: MEDIUM
+    ports: [443, 80, 8080]
+    queries:
+      shodan: 'gitlab OR "GitLab" OR http.title:"GitLab"'
+      censys: 'services.software.product="GitLab"'
+      fofa: 'app="GitLab"'
+      zoomeye: 'app:"GitLab"'
+
+  argocd:
+    description: "GitOps ArgoCD (déploiements Kubernetes)"
+    risk_level: CRITICAL
+    ports: [443, 80]
+    queries:
+      shodan: 'argocd OR "Argo CD" OR http.title:"Argo"'
+      censys: 'http.title="Argo CD"'
+      fofa: 'title="Argo CD"'
+      zoomeye: 'title:"Argo CD"'
+
+  prometheus:
+    description: "Monitoring Prometheus (métriques exposées)"
+    risk_level: MEDIUM
+    ports: [9090, 9093]
+    queries:
+      shodan: 'prometheus OR "Prometheus Time Series" OR port:9090'
+      censys: 'services.software.product="Prometheus"'
+      fofa: 'app="Prometheus"'
+      zoomeye: 'service:"Prometheus"'
+
+  grafana:
+    description: "Dashboards Grafana"
+    risk_level: MEDIUM
+    ports: [3000, 443, 80]
+    queries:
+      shodan: 'grafana OR "Grafana Labs" OR http.title:"Grafana"'
+      censys: 'services.software.product="Grafana"'
+      fofa: 'app="Grafana"'
+      zoomeye: 'app:"Grafana"'
+
+  elasticsearch:
+    description: "Clusters Elasticsearch (data non-sécurisée)"
+    risk_level: CRITICAL
+    ports: [9200, 9300]
+    queries:
+      shodan: 'elasticsearch OR "Elasticsearch" OR port:9200'
+      censys: 'services.software.product="Elasticsearch"'
+      fofa: 'app="Elasticsearch"'
+      zoomeye: 'service:"Elasticsearch"'
+
+  kibana:
+    description: "Interface Kibana"
+    risk_level: MEDIUM
+    ports: [5601, 443, 80]
+    queries:
+      shodan: 'kibana OR "Kibana" OR http.title:"Kibana"'
+      censys: 'services.software.product="Kibana"'
+      fofa: 'app="Kibana"'
+      zoomeye: 'app:"Kibana"'
+
+  rancher:
+    description: "Management Kubernetes Rancher"
+    risk_level: HIGH
+    ports: [443, 80, 8080]
+    queries:
+      shodan: 'rancher OR "Rancher" OR http.title:"Rancher"'
+      censys: 'http.title="Rancher"'
+      fofa: 'app="Rancher"'
+      zoomeye: 'app:"Rancher"'
+
+  ansible:
+    description: "Automation Ansible/AWX"
+    risk_level: HIGH
+    ports: [443, 80, 8080]
+    queries:
+      shodan: 'ansible OR "AWX" OR "Ansible Tower"'
+      censys: 'http.title="AWX" OR http.title="Ansible Tower"'
+      fofa: 'title="AWX" || title="Ansible Tower"'
+      zoomeye: 'title:"Ansible"'
+
+  terraform:
+    description: "Infrastructure as Code Terraform"
+    risk_level: MEDIUM
+    ports: [443, 80]
+    queries:
+      shodan: 'terraform OR "Terraform Enterprise" OR "TFE"'
+      censys: 'http.title="Terraform Enterprise"'
+      fofa: 'title="Terraform"'
+      zoomeye: 'title:"Terraform"'
+
+  # =========================================================================
+  # Presets "transitoires" — NOTE : ces requêtes cherchent des bannières
+  # avec numéros de version ou timestamps aberrants (souvent des données
+  # de test, des placeholders, ou des horloges mal réglées côté serveur).
+  # Le nommage "temporal-anomaly" / "echo-present" est un habillage
+  # thématique, pas une détection physique réelle. Voir core/transients.py.
+  # =========================================================================
+  temporal-anomaly:
+    description: "Versions/timestamps aberrants dans les bannières (δ < 0.4)"
+    risk_level: OMEGA
+    ports: []
+    transients_only: true
+    queries:
+      shodan: 'kubernetes version:"99" OR docker version:"2075" OR timestamp:"2075"'
+      censys: 'services.version:"99.*" OR services.version:"2075.*"'
+      fofa: 'body="2075" || body="1066"'
+      zoomeye: 'body:"future" || body:"anomaly"'
+
+  echo-present:
+    description: "Bannières avec certificats/timestamps datés dans le futur"
+    risk_level: OMEGA
+    ports: []
+    transients_only: true
+    queries:
+      shodan: 'timestamp:"2075" -org:"simulated"'
+      censys: 'services.tls.certificates.leaf_data.not_valid_after:"2075*"'
+      fofa: 'cert="2075"'
+      zoomeye: 'ssl:"2075"'

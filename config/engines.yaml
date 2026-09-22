@@ -1,0 +1,42 @@
+# ==============================================================================
+# Configuration des moteurs de recherche
+# Les clés peuvent aussi venir de variables d'environnement (${VAR})
+# ==============================================================================
+
+defaults:
+  timeout: 30
+  cache_ttl: 1800
+  limit: 50
+  user_agent: "UNCOVER-ECHO/3.0"
+  max_retries: 3
+  backoff_factor: 0.5
+
+engines:
+  shodan:
+    enabled: true
+    api_key: "${SHODAN_API_KEY}"
+    endpoint: "https://api.shodan.io/shodan/host/search"
+    simulate_on_missing_key: true   # marque les résultats comme simulés
+    rate_limit: 1.0                  # requêtes/seconde
+
+  censys:
+    enabled: false
+    api_id: "${CENSYS_API_ID}"
+    api_secret: "${CENSYS_API_SECRET}"
+    endpoint: "https://search.censys.io/api/v2/hosts/search"
+    rate_limit: 0.5
+
+  fofa:
+    enabled: false
+    email: "${FOFA_EMAIL}"
+    api_key: "${FOFA_API_KEY}"
+    endpoint: "https://fofa.info/api/v1/search/all"
+    rate_limit: 0.5
+
+  zoomeye:
+    enabled: false
+    username: "${ZOOMEYE_USERNAME}"
+    password: "${ZOOMEYE_PASSWORD}"
+    endpoint_login: "https://api.zoomeye.org/user/login"
+    endpoint_search: "https://api.zoomeye.org/host/search"
+    rate_limit: 1.0

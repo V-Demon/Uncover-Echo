@@ -1,0 +1,42 @@
+# ==============================================================================
+# Configuration UI (palette C64 + templates)
+# ==============================================================================
+
+theme:
+  colors:
+    BLACK: '#000000'
+    WHITE: '#FFFFFF'
+    RED: '#880000'
+    CYAN: '#008888'
+    PURPLE: '#AA00AA'
+    GREEN: '#00AA00'
+    BLUE: '#0000AA'
+    YELLOW: '#AAAA00'
+    ORANGE: '#AA5500'
+    BROWN: '#552200'
+    LIGHT_RED: '#FF5555'
+    DARK_GREY: '#555555'
+    GREY: '#777777'
+    LIGHT_GREEN: '#55FF55'
+    LIGHT_BLUE: '#5555FF'
+    LIGHT_GREY: '#AAAAAA'
+    OMEGA: '#FF00FF'          # couleur dédiée aux anomalies "transientes"
+
+  fonts:
+    header: ['Courier New', 7]
+    terminal: ['Courier New', 9]
+    label: ['Courier', 9]
+    button: ['Courier', 10, 'bold']
+
+window:
+  title: "UNCOVER-ECHO v3.1 — Multi-Engine OSINT Scanner"
+  geometry: "1500x950"
+  bg_color: BLUE
+
+templates:
+  header_file: "templates/header.txt"
+
+logging:
+  show_timestamps: true
+  show_engine_tags: true
+  colored: true

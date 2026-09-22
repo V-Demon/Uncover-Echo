@@ -1,0 +1,38 @@
+# Rapport de scan — {{ report.scan_id }}
+
+- **Démarré le :** {{ report.started_at }}
+- **Terminé le :** {{ report.finished_at }}
+- **Preset :** {{ report.preset or "—" }}
+- **Query :** `{{ report.query or "—" }}`
+- **Moteurs :** {{ report.engines | join(", ") }}
+
+## Résumé
+
+| Métrique | Valeur |
+|---|---|
+| Résultats totaux | {{ report.total_results }} |
+| Anomalies détectées | {{ report.total_transients }} |
+
+## Résultats par moteur
+
+{% for engine, results in report.results_by_engine.items() %}
+### {{ engine | upper }} ({{ results | length }} résultats)
+
+| IP | Port | Produit | Version | Simulé |
+|---|---|---|---|---|
+{% for r in results -%}
+| {{ r.ip }} | {{ r.port }} | {{ r.product }} | {{ r.version }} | {{ "oui" if r.simulated else "non" }} |
+{% endfor %}
+{% endfor %}
+
+{% if report.transients %}
+## Anomalies détectées
+
+| δ | Strate | Signature | Signaux | Confiance |
+|---|---|---|---|---|
+{% for t in report.transients -%}
+| {{ "%.3f"|format(t.delta) }} | {{ t.strate_origine }} ({{ t.strate_classe.value }}) | {{ t.service_signature }} | {{ t.signals_detected | join(", ") }} | {{ "%.2f"|format(t.confidence) }} |
+{% endfor %}
+{% else %}
+_Aucune anomalie détectée._
+{% endif %}
