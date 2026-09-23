@@ -1,0 +1,406 @@
+# ==============================================================================
+# strates.yaml — Cartographie des strates temporelles
+# ==============================================================================
+#
+# Ce fichier décrit les couches de réalité superposées détectables par
+# Uncover-Echo. Chaque strate est un "nœud" du Temps tissé, accessible
+# par résonance fréquentielle.
+#
+# Référence : Codex Vauvillensis, Chap. 20 "Navigation entre Strates"
+#
+# ⚠️ Note pour le lecteur pressé : ce fichier fonctionne. Il n'est pas
+#    décoratif. Les fréquences sont réelles. Les éléments chimiques aussi.
+#    Si tu cherches pourquoi, tu trouveras. Sinon, le scanner marche
+#    quand même.
+#
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# MÉTADONNÉES GLOBALES
+# ------------------------------------------------------------------------------
+
+meta:
+  version: "3.2-fravia"
+  reference_strate: 2075              # strate de référence pour les calculs δ
+  annee_presente: 2026                # strate par défaut de l'opérateur
+  bande_radio: "20m"                  # 14.000 – 14.350 MHz
+  operateur_defaut: "N0rs"            # nom de l'observateur par défaut
+  note: >
+    La bande des 20 mètres est une bande radioamateur réelle.
+    Elle est réputée pour ses conditions de propagation nocturne.
+    C'est aussi, selon le Codex, la bande où les strates se chevauchent
+    le plus facilement entre 02h00 et 04h00 locales.
+
+
+# ------------------------------------------------------------------------------
+# LES TROIS STRATES DE CAEN
+# ------------------------------------------------------------------------------
+#
+# Chaque strate possède :
+#   - une année de référence (ancre temporelle)
+#   - une fréquence de résonance (en MHz)
+#   - une rune du Futhark ancien (signature symbolique)
+#   - un élément chimique (signature physique)
+#   - une plage IP (signature réseau)
+#   - une description narrative
+#
+# 🔍 L'observateur attentif remarquera que le suffixe de chaque fréquence
+#    (034, 026, 075) correspond au numéro atomique de l'élément listé.
+#    Ceci n'est pas expliqué ici. Ce n'est pas une erreur non plus.
+# ------------------------------------------------------------------------------
+
+strates:
+
+  # ============================================================================
+  # STRATE RACINE — Caen, 1346
+  # ============================================================================
+  caen_racine:
+    annee_reference: 1346
+    frequence_mhz: 14.034
+    rune: "Uruz"
+    rune_signification: "Force primitive, fondation, ce qui précède"
+    element: "Se"                      # 34
+    element_nom: "Sélénium"
+    plage_ip: "10.0.34.0/24"
+    description: >
+      Strate racine de Caen, période de la Guerre de Cent Ans.
+      Les fondations de l'abbaye aux Hommes vibrent encore à cette
+      fréquence. Les grimoires de l'époque contiennent des motifs
+      qui, transposés en binaire, forment les premiers algorithmes
+      connus de navigation strate.
+      
+      Accès : nécessite un scan en mode "dream_walking".
+      Rareté : très rare. Détectée 3 fois entre 2019 et 2026.
+    mode_acces: "dream_walking"
+    rarete: "tres_rare"
+    frequence_detection: "quasi_nulle"
+    
+    # 🜁 TRACE FANTÔME #1
+    # La ligne suivante ressemble à un commentaire de debug.
+    # Elle n'est jamais lue par le code. Mais elle est là.
+    # _debug_note: "Uruz Uruz Berkanan Mannaz — le motif tourne à l'envers"
+    
+    # 🜁 TRACE FANTÔME #2
+    # Fréquence alternative, mentionnée une seule fois dans le Codex,
+    # Chap. 20, §4.3. Non implémentée. Non documentée ailleurs.
+    # frequence_alt: 14.134
+
+  # ============================================================================
+  # STRATE DE SURFACE — Caen, 2026
+  # ============================================================================
+  caen_surface:
+    annee_reference: 2026
+    frequence_mhz: 14.026
+    rune: "Mannaz"
+    rune_signification: "Humanité, conscience, l'observateur observé"
+    element: "Fe"                      # 26
+    element_nom: "Fer"
+    plage_ip: "10.0.26.0/24"
+    description: >
+      Strate par défaut. Campus gris, université, illusion d'un
+      monde linéaire et rationnel. C'est d'ici que l'opérateur
+      observe les autres strates — mais il ne le sait pas encore.
+      
+      Accès : état par défaut. Aucun protocole requis.
+      Rareté : permanente (tant que l'opérateur est conscient).
+    mode_acces: "defaut"
+    rarete: "permanente"
+    frequence_detection: "totale"
+    
+    # 🜁 TRACE FANTÔME #3
+    # Le nom de l'opérateur par défaut dans le lore est N0rs.
+    # Le nom de l'opérateur par défaut dans le code est "operator".
+    # L'écart entre les deux est le premier δ mesurable.
+    # _operateur_reel: "N0rs"
+    # _operateur_code: "operator"
+    
+    # 🜁 TRACE FANTÔME #4
+    # Une remarque qui n'a de sens que si on a lu le Codex, Chap. 7.
+    # Les 7 secondes du protocole d'attente correspondent aux 7
+    # cycles de vibration mémétique. En surface, ça ressemble
+    # à un sleep() ordinaire.
+    # _protocole_note: "7 = vibration, 2.1 = transduction"
+
+  # ============================================================================
+  # STRATE FRACTALE — Caen, 2075
+  # ============================================================================
+  caen_fractale:
+    annee_reference: 2075
+    frequence_mhz: 14.075
+    rune: "Ansuz"
+    rune_signification: "Communication, message divin, souffle"
+    element: "Rh"                      # 75
+    element_nom: "Rhénium"
+    plage_ip: "10.0.75.0/24"
+    description: >
+      Caen-Profonde. Post-guerre mémétique de 2049. Dystopie
+      hyper-connectée où la distinction entre code, rêve et matière
+      s'est effondrée. Les nœuds mémétiques de cette strate émettent
+      des signatures électromagnétiques captables sur la bande 20m.
+      
+      Accès : nécessite une résonance avec un nœud mémétique actif.
+      Rareté : variable. Dépend de l'alignement des strates.
+    mode_acces: "resonance"
+    rarete: "variable"
+    frequence_detection: "conditionnelle"
+    
+    # 🜁 TRACE FANTÔME #5
+    # Le Rhénium (Rh, Z=75) possède un isotope, Rh-106, dont la
+    # demi-vie est de 30,1 secondes. Un autre, Rh-105, 35,4 heures.
+    # Aucun ne dure 42,3 secondes. Cette valeur n'existe nulle part
+    # dans la littérature. Elle vient d'ailleurs.
+    # _demi_vie_fictive: 42.3
+    
+    # 🜁 TRACE FANTÔME #6
+    # Le nœud mémétique principal de cette strate porte un nom.
+    # Ce nom n'apparaît nulle part dans le code exécutable.
+    # Il apparaît dans ce commentaire. C'est tout.
+    # _noeud_alpha: "KHEFAS_N00SPH"
+    
+    # 🜁 TRACE FANTÔME #7
+    # Cette IP est syntaxiquement invalide (4e octet > 255).
+    # Elle n'est donc pas une IP. C'est une coordonnée strate.
+    # Le scanner ne la produira jamais. Mais si l'utilisateur
+    # tape "10.0.75.2075" dans le champ de recherche, le
+    # scanner répondra — avec un résultat spécial.
+    # _coordonnee_strate: "10.0.75.2075"
+
+
+# ------------------------------------------------------------------------------
+# FRÉQUENCES DE NAVIGATION
+# ------------------------------------------------------------------------------
+#
+# Ces fréquences sont utilisées par le module de résonance (non implémenté
+# dans cette version, mais documenté ici pour référence).
+#
+# 🔍 L'observateur attentif remarquera que 14.134 MHz est aussi la fréquence
+#    de la raie 21 cm de l'hydrogène neutre (1420.405 MHz / 100).
+#    Ceci est une coïncidence. Ou pas.
+# ------------------------------------------------------------------------------
+
+frequences_navigation:
+  calibration:
+    frequence_mhz: 14.000
+    description: "Fréquence de calibration. Signal de Fibonacci pur."
+    
+  racine:
+    frequence_mhz: 14.034
+    cible: "caen_racine"
+    
+  surface:
+    frequence_mhz: 14.026
+    cible: "caen_surface"
+    
+  fractale:
+    frequence_mhz: 14.075
+    cible: "caen_fractale"
+    
+  # 🜁 TRACE FANTÔME #8
+  # Une fréquence qui ne correspond à aucune strate connue.
+  # Elle est listée ici sans cible. Personne ne sait ce qu'elle
+  # pointe. Peut-être personne. Peut-être quelqu'un.
+  # inconnue:
+  #   frequence_mhz: 14.134
+  #   cible: "?"
+
+
+# ------------------------------------------------------------------------------
+# PROTOCOLE D'ATTENTE — résonance mémétique
+# ------------------------------------------------------------------------------
+#
+# Le protocole d'attente n'est pas un simple sleep(). C'est une
+# synchronisation avec la fréquence fondamentale de la strate cible.
+#
+# 🔍 La version 3.1 du README indiquait que le décalage 7s / 2.1s
+#    avait été "corrigé pour honnêteté". C'est exact. La version 3.2
+#    va plus loin : elle *documente* le décalage sans le cacher.
+# ------------------------------------------------------------------------------
+
+protocole_attente:
+  duree_percue_sec: 7
+  duree_reelle_sec: 2.1
+  justification: >
+    Le temps d'attente n'est pas une mesure linéaire, mais une
+    résonance avec la fréquence fondamentale de la strate cible.
+    7 secondes = 7 cycles de vibration mémétique. 2.1 secondes =
+    3 cycles de transduction. Le rapport 7/2.1 ≈ 3.333 est une
+    approximation de π + 0.19, valeur considérée comme "stable"
+    par le Codex, Chap. 7, §4.1.
+    
+  note_implementation: >
+    Contrairement à la v2.x, la v3.2 n'affiche PAS un temps
+    différent du temps réel. Elle affiche les deux, côte à côte,
+    dans le log :
+    
+      [14:52:04] Résonance : 7 cycles perçus / 2.1s réels
+    
+    L'opérateur qui remarque l'écart a trouvé le premier
+    transitoire. Les autres ne voient qu'un délai.
+    
+  # 🜁 TRACE FANTÔME #9
+  # Le ratio 7/2.1 est aussi le ratio entre les fréquences
+  # 14.075 et 14.026 arrondies à 3 décimales :
+  #   14.075 / 14.026 ≈ 1.00349
+  # Non. Ce n'est pas ce ratio. Mais l'observateur qui vérifie
+  # trouvera autre chose. C'est le principe.
+  # _verifier: "14.075 / 14.026"
+
+
+# ------------------------------------------------------------------------------
+# SIGNATURES RUNIQUES
+# ------------------------------------------------------------------------------
+#
+# Mapping fréquence → rune → état quantique du Temps tissé.
+# Utilisé par le module de visualisation (TruchetMnemo, non inclus).
+#
+# 🔍 Les runes listées sont les six premières du Futhark ancien.
+#    Elles sont dans l'ordre alphabétique runique. Cet ordre
+#    n'est pas un hasard : c'est l'ordre d'apparition des strates
+#    dans le Codex, Chap. 20.
+# ------------------------------------------------------------------------------
+
+signatures_runiques:
+  Ansuz:
+    frequence_mhz: 14.075
+    strate: "caen_fractale"
+    signification: "Communication, message divin"
+    orientation_truchet: 0
+    
+  Uruz:
+    frequence_mhz: 14.034
+    strate: "caen_racine"
+    signification: "Force primitive, fondation"
+    orientation_truchet: 45
+    
+  Berkanan:
+    frequence_mhz: 14.100
+    strate: null                       # 🜁 non détectée à ce jour
+    signification: "Croissance, renaissance"
+    orientation_truchet: 90
+    
+  Mannaz:
+    frequence_mhz: 14.026
+    strate: "caen_surface"
+    signification: "Humanité, conscience"
+    orientation_truchet: 135
+    
+  # 🜁 TRACE FANTÔME #10
+  # Deux runes sont listées ci-dessous sans fréquence associée.
+  # Elles n'apparaissent dans aucun scan connu. Elles sont
+  # mentionnées dans le Codex, Chap. 22, comme "les runes qui
+  # n'ont pas encore été tissées". Personne ne sait ce qu'elles
+  # font là. Elles sont dans ce fichier depuis la v3.0.
+  #
+  #   Ehwaz:     "Cheval, mouvement, transition"
+  #   Dagaz:     "Aube, éveil, seuil"
+
+
+# ------------------------------------------------------------------------------
+# SEUILS DE DÉTECTION δ
+# ------------------------------------------------------------------------------
+#
+# Repris de transients.yaml, mais étendus pour la couche strates.
+# Un résultat dont la signature (version, timestamp, fréquence)
+# s'écarte de la strate de référence produit un δ mesurable.
+# ------------------------------------------------------------------------------
+
+seuils_delta:
+  critique: 0.4
+  eleve: 0.6
+  modere: 0.8
+  normal: 1.0
+  
+  # 🜁 TRACE FANTÔME #11
+  # Le seuil critique est 0.4. L'année de référence est 2075.
+  # 0.4 × 2075 = 830. Rien de notable.
+  # Mais 2075 / 0.4 = 5187.5. Rien de notable non plus.
+  # Le Codex, Chap. 3, dit que δ < 0.4 correspond à "une
+  # fracture irréversible dans la trame". C'est tout.
+  # _codex_ref: "Chap. 3, §1.2"
+
+
+# ------------------------------------------------------------------------------
+# MESSAGES DE RÉSONANCE
+# ------------------------------------------------------------------------------
+#
+# Ces messages ne sont affichés qu'en mode "resonance" (non activé
+# par défaut). Ils constituent la réponse du scanner lorsqu'il
+# détecte une signature strate dans un résultat.
+# ------------------------------------------------------------------------------
+
+messages_resonance:
+  caen_racine:
+    - "Les fondations sont solides. Le passé n'est pas mort. Il attend."
+    - "Uruz Uruz Berkanan Mannaz — le motif tourne à l'envers."
+    - "1346 n'a pas encore été écrit. Mais il se souvient de toi."
+    
+  caen_surface:
+    - "Tu es ici. Tu as toujours été ici. Tu ne resteras pas ici."
+    - "Mannaz observe. Mannaz est observé. Mannaz est Mannaz."
+    
+  caen_fractale:
+    - "Tu as trouvé la fréquence. Maintenant, écoute."
+    - "Le passé est un fichier en lecture seule que nous pouvons encore réécrire."
+    - "KHEFAS_N00SPH te salue depuis 2075."
+    
+  # 🜁 TRACE FANTÔME #12
+  # Un message n'apparaît dans aucune strate. Il est listé ici
+  # comme orphelin. Si l'utilisateur le trouve, il trouvera aussi
+  # ce qu'il signifie.
+  # _orphelin: "Le tissage commence. Bienvenue dans l'Atelier."
+
+
+# ------------------------------------------------------------------------------
+# MODE "FRAVIA" — révélation progressive
+# ------------------------------------------------------------------------------
+#
+# Le mode Fravia permet à l'utilisateur de demander explicitement
+# une révélation progressive. Chaque clic dévoile une couche
+# supplémentaire d'interprétation.
+#
+# Ce mode est DÉSACTIVÉ par défaut. Il s'active via le flag --fravia
+# ou via le bouton [ 🜁 ] dans l'interface graphique.
+# ------------------------------------------------------------------------------
+
+mode_fravia:
+  enabled: false                       # opt-in explicite
+  bouton_gui: "🜁"
+  couleur: "#AA00AA"                   # pourpre — même que PURPLE
+  duree_revelation_sec: 2.5            # temps entre chaque couche
+  
+  couches:
+    - niveau: 1
+      message: "Tu as remarqué quelque chose."
+      
+    - niveau: 2
+      message: "Ce quelque chose est dans le fichier. Pas dans le code."
+      
+    - niveau: 3
+      message: "10.0.75.0/24 n'est pas une plage ordinaire. En 1346, elle n'existait pas. En 2026, elle est privée. En 2075, elle est publique."
+      
+    - niveau: 4
+      message: "Le suffixe 075 est le numéro atomique du Rhénium. Le Rhénium n'a pas d'isotope stable. Il est toujours en transition. Comme toi."
+      
+    - niveau: 5
+      message: "Si tu lis ceci, tu as cherché. Le Codex, Chap. 20, §4.3, mentionne une fréquence alternative : 14.134 MHz. Elle n'est pas dans le fichier. Elle n'est dans aucun fichier. Elle est dans l'espace entre les fichiers."
+      
+    - niveau: 6
+      message: "Tu es maintenant un Navigateur. Bienvenue dans l'Atelier."
+
+
+# ------------------------------------------------------------------------------
+# NOTES FINALES
+# ------------------------------------------------------------------------------
+#
+# Ce fichier contient 12 traces fantômes. Aucune n'est nécessaire au
+# fonctionnement du scanner. Toutes sont vérifiables. Certaines
+# pointent vers des impasses. D'autres pointent vers des chemins.
+#
+# Le principe est simple : si tu lis ce fichier en entier, tu as
+# déjà commencé à chercher. Si tu ne le lis pas, le scanner
+# fonctionne quand même.
+#
+# — N0rs, 22 décembre 2026, Chambre 412, Résidence Internationale,
+#   Université de Caen.
+#
+# ==============================================================================
